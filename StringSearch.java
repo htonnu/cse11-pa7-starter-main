@@ -23,12 +23,12 @@ class FileHelper {
 }
 
 class StringSearch {
-    static boolean matchesAll(Query[] qs, String s) {
+    static boolean matchesAll(Query[] qs, String s) { 
         boolean result = true;
         for(int i = 0; i < qs.length; i++) {
-            if (qs[i].toString().contains("Length") ||
-                qs[i].toString().contains("Greater") ||
-                qs[i].toString().contains("Less")) {
+            if (qs[i].toString().contains("Length")  ||
+                     qs[i].toString().contains("Greater") ||
+                     qs[i].toString().contains("Less")) {
                 if (qs[i].matches(Integer.toString(s.length()))) {
                     result = true;
                 }
@@ -77,7 +77,7 @@ class StringSearch {
             return transform;
         }
         else if (querySplit[0].contains("replace")) {
-            String[] querySplitAgain = querySplit[1].split(";");
+            String[] querySplitAgain = querySplit[1].split(";"); 
             String querySplit2 = querySplitAgain[0].substring(1, querySplitAgain[0].length()-1);
             String querySplit3 = querySplitAgain[1].substring(1, querySplitAgain[1].length()-1);
             replaceTransform transform = new replaceTransform(querySplit2, querySplit3);
@@ -176,6 +176,7 @@ class StringSearch {
                     Query query = readQuery(queriesStringList[i]); 
                     queriesList[i] = query;
                 }
+
                 for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) {
                     if(matchesAll(queriesList, FileHelper.getLines(arr[0])[i])) {
                         System.out.println(FileHelper.getLines(arr[0])[i]);
@@ -295,18 +296,18 @@ class StringSearch {
                     queriesList[i] = query;
                 }
                 for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) {
-                    if(matchesAll(queriesList, FileHelper.getLines(arr[0])[i])) {
-                        Transform transform = readTransform(arr[2]);                             
+                    if(matchesAll(queriesList, FileHelper.getLines(arr[0])[i])) {                        
                         if (arr[2].contains("&")) { 
                             String[] transformStringList = arr[2].split("&"); 
                             Transform[] transformList = new Transform[transformStringList.length]; 
-                            for(int j = 0; j < transformList.length; j++) {      
-                                transform = readTransform(transformStringList[j]); 
+                            for (int j = 0; j < transformStringList.length; j++){
+                                Transform transform = readTransform(transformStringList[j]);
                                 transformList[j] = transform; 
                             }
                             System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                         }
                         else {
+                            Transform transform = readTransform(arr[2]);
                             System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                         }
                     }
@@ -314,7 +315,6 @@ class StringSearch {
             }
             else if (arr[1].contains("not")) {
                 Query query = readQuery(arr[1]);
-                Transform transform = readTransform(arr[2]);
                 if (arr[1].contains("length")) {
                     for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) {
                         String lengthString = Integer.toString(FileHelper.getLines(arr[0])[i].length());
@@ -322,13 +322,14 @@ class StringSearch {
                             if (arr[2].contains("&")) { 
                                 String[] transformStringList = arr[2].split("&"); 
                                 Transform[] transformList = new Transform[transformStringList.length]; 
-                                for(int j = 0; j < transformList.length; j++) {      
-                                    transform = readTransform(transformStringList[j]); 
+                                for (int j = 0; j < transformStringList.length; j++){
+                                    Transform transform = readTransform(transformStringList[j]);
                                     transformList[j] = transform; 
                                 }
                                 System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                             }
                             else {
+                                Transform transform = readTransform(arr[2]);
                                 System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                             }
                         }
@@ -341,15 +342,16 @@ class StringSearch {
                             if (arr[2].contains("&")) { 
                                 String[] transformStringList = arr[2].split("&"); 
                                 Transform[] transformList = new Transform[transformStringList.length]; 
-                                for(int j = 0; j < transformList.length; j++) {      
-                                    transform = readTransform(transformStringList[j]); 
+                                for (int j = 0; j < transformStringList.length; j++){
+                                    Transform transform = readTransform(transformStringList[j]);
                                     transformList[j] = transform; 
                                 }
                                 System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                             }
                             else {
+                                Transform transform = readTransform(arr[2]);
                                 System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
-                            }                     
+                            }                
                         }
                     }
                 }
@@ -360,15 +362,16 @@ class StringSearch {
                             if (arr[2].contains("&")) { 
                                 String[] transformStringList = arr[2].split("&"); 
                                 Transform[] transformList = new Transform[transformStringList.length]; 
-                                for(int j = 0; j < transformList.length; j++) {      
-                                    transform = readTransform(transformStringList[j]); 
+                                for (int j = 0; j < transformStringList.length; j++){
+                                    Transform transform = readTransform(transformStringList[j]);
                                     transformList[j] = transform; 
                                 }
                                 System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                             }
                             else {
+                                Transform transform = readTransform(arr[2]);
                                 System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
-                            }                     
+                            }                 
                         }
                     }
                 }
@@ -378,13 +381,14 @@ class StringSearch {
                             if (arr[2].contains("&")) { 
                                 String[] transformStringList = arr[2].split("&"); 
                                 Transform[] transformList = new Transform[transformStringList.length]; 
-                                for(int j = 0; j < transformList.length; j++) {      
-                                    transform = readTransform(transformStringList[j]); 
+                                for (int j = 0; j < transformStringList.length; j++){
+                                    Transform transform = readTransform(transformStringList[j]);
                                     transformList[j] = transform; 
                                 }
                                 System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                             }
                             else {
+                                Transform transform = readTransform(arr[2]);
                                 System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                             }
                         }
@@ -397,13 +401,14 @@ class StringSearch {
                             if (arr[2].contains("&")) { 
                                 String[] transformStringList = arr[2].split("&"); 
                                 Transform[] transformList = new Transform[transformStringList.length]; 
-                                for(int j = 0; j < transformList.length; j++) {      
-                                    transform = readTransform(transformStringList[j]); 
+                                for (int j = 0; j < transformStringList.length; j++){
+                                    Transform transform = readTransform(transformStringList[j]);
                                     transformList[j] = transform; 
                                 }
                                 System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                             }
                             else {
+                                Transform transform = readTransform(arr[2]);
                                 System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                             }
                         }
@@ -416,13 +421,14 @@ class StringSearch {
                             if (arr[2].contains("&")) { 
                                 String[] transformStringList = arr[2].split("&"); 
                                 Transform[] transformList = new Transform[transformStringList.length]; 
-                                for(int j = 0; j < transformList.length; j++) {      
-                                    transform = readTransform(transformStringList[j]); 
+                                for (int j = 0; j < transformStringList.length; j++){
+                                    Transform transform = readTransform(transformStringList[j]);
                                     transformList[j] = transform; 
                                 }
                                 System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                             }
                             else {
+                                Transform transform = readTransform(arr[2]);
                                 System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                             }
                         }
@@ -431,20 +437,20 @@ class StringSearch {
             }
             else if (arr[1].contains("length")) {
                 Query query = readQuery(arr[1]);
-                Transform transform = readTransform(arr[2]);
                 for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) {
                     String lengthString = Integer.toString(FileHelper.getLines(arr[0])[i].length());
                     if (query.matches(lengthString)) {
                         if (arr[2].contains("&")) { 
                             String[] transformStringList = arr[2].split("&"); 
                             Transform[] transformList = new Transform[transformStringList.length]; 
-                            for(int j = 0; j < transformList.length; j++) {      
-                                transform = readTransform(transformStringList[j]); 
+                            for (int j = 0; j < transformStringList.length; j++){
+                                Transform transform = readTransform(transformStringList[j]);
                                 transformList[j] = transform; 
                             }
                             System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                         }
                         else {
+                            Transform transform = readTransform(arr[2]);
                             System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                         }
                     }
@@ -452,20 +458,20 @@ class StringSearch {
             }
             else if (arr[1].contains("greater")) {
                 Query query = readQuery(arr[1]);
-                Transform transform = readTransform(arr[2]);
                 for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) {
                     String lengthString = Integer.toString(FileHelper.getLines(arr[0])[i].length());
                     if (query.matches(lengthString)) {
                         if (arr[2].contains("&")) { 
                             String[] transformStringList = arr[2].split("&"); 
                             Transform[] transformList = new Transform[transformStringList.length]; 
-                            for(int j = 0; j < transformList.length; j++) {      
-                                transform = readTransform(transformStringList[j]); 
+                            for (int j = 0; j < transformStringList.length; j++){
+                                Transform transform = readTransform(transformStringList[j]);
                                 transformList[j] = transform; 
                             }
                             System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                         }
                         else {
+                            Transform transform = readTransform(arr[2]);
                             System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                         }
                     }
@@ -473,20 +479,20 @@ class StringSearch {
             }
             else if (arr[1].contains("less")) {
                 Query query = readQuery(arr[1]);
-                Transform transform = readTransform(arr[2]);
                 for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) {
                     String lengthString = Integer.toString(FileHelper.getLines(arr[0])[i].length());
                     if (query.matches(lengthString)) {
                         if (arr[2].contains("&")) { 
                             String[] transformStringList = arr[2].split("&"); 
                             Transform[] transformList = new Transform[transformStringList.length]; 
-                            for(int j = 0; j < transformList.length; j++) {      
-                                transform = readTransform(transformStringList[j]); 
+                            for (int j = 0; j < transformStringList.length; j++){
+                                Transform transform = readTransform(transformStringList[j]);
                                 transformList[j] = transform; 
                             }
                             System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                         }
                         else {
+                            Transform transform = readTransform(arr[2]);
                             System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                         }
                     }
@@ -494,19 +500,19 @@ class StringSearch {
             }
             else if (arr[1].contains("contains")) {
                 Query query = readQuery(arr[1]);
-                Transform transform = readTransform(arr[2]);
                 for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) { 
                     if (query.matches(FileHelper.getLines(arr[0])[i])) { 
                         if (arr[2].contains("&")) { 
                             String[] transformStringList = arr[2].split("&"); 
                             Transform[] transformList = new Transform[transformStringList.length]; 
-                            for(int j = 0; j < transformList.length; j++) {      
-                                transform = readTransform(transformStringList[j]); 
+                            for (int j = 0; j < transformStringList.length; j++){
+                                Transform transform = readTransform(transformStringList[j]);
                                 transformList[j] = transform; 
                             }
                             System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                         }
                         else {
+                            Transform transform = readTransform(arr[2]);
                             System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                         }
                     }
@@ -514,20 +520,20 @@ class StringSearch {
             }
             else if (arr[1].contains("starts")) {
                 Query query = readQuery(arr[1]);
-                Transform transform = readTransform(arr[2]);
                 for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) { 
                     String[] poemLineSplit = FileHelper.getLines(arr[0])[i].split(" ");
                     if (query.matches(poemLineSplit[0])) { 
                         if (arr[2].contains("&")) { 
                             String[] transformStringList = arr[2].split("&"); 
                             Transform[] transformList = new Transform[transformStringList.length]; 
-                            for(int j = 0; j < transformList.length; j++) {      
-                                transform = readTransform(transformStringList[j]); 
+                            for (int j = 0; j < transformStringList.length; j++){
+                                Transform transform = readTransform(transformStringList[j]);
                                 transformList[j] = transform; 
                             }
                             System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                         }
                         else {
+                            Transform transform = readTransform(arr[2]);
                             System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                         }
                     }
@@ -535,20 +541,20 @@ class StringSearch {
             }
             else if (arr[1].contains("ends")) {
                 Query query = readQuery(arr[1]);
-                Transform transform = readTransform(arr[2]);
                 for(int i = 0; i < FileHelper.getLines(arr[0]).length; i++) { 
                     String[] poemLineSplit = FileHelper.getLines(arr[0])[i].split(" ");
                     if (query.matches(poemLineSplit[poemLineSplit.length-1])) { 
                         if (arr[2].contains("&")) { 
                             String[] transformStringList = arr[2].split("&"); 
                             Transform[] transformList = new Transform[transformStringList.length]; 
-                            for(int j = 0; j < transformList.length; j++) {      
-                                transform = readTransform(transformStringList[j]); 
+                            for (int j = 0; j < transformStringList.length; j++){
+                                Transform transform = readTransform(transformStringList[j]);
                                 transformList[j] = transform; 
                             }
                             System.out.println(applyAll(transformList, FileHelper.getLines(arr[0])[i]));
                         }
                         else {
+                            Transform transform = readTransform(arr[2]);
                             System.out.println(transform.transform(FileHelper.getLines(arr[0])[i]));
                         }
                     }
@@ -585,7 +591,7 @@ class firstTransform implements Transform {
     }
 }
 
-class lastTransform implements Transform {
+class lastTransform implements Transform { 
     int field;
     lastTransform(int field) {
         this.field = field;
@@ -662,7 +668,7 @@ class LessQuery implements Query {
     LessQuery(String field) {
         this.field = field;
     }
-    public boolean matches(String s)    { 
+    public boolean matches(String s)    {
         if(Integer.parseInt(s) < Integer.parseInt(this.field)) {
             return true;
         }
@@ -672,13 +678,13 @@ class LessQuery implements Query {
     }
 }
 
-class StartsQuery implements Query {
+class StartsQuery implements Query {    
     String field;
     StartsQuery(String field) {
         this.field = field;
     }
     public boolean matches(String s) { 
-        if(s.contains(this.field)) {
+        if(s.startsWith(this.field)) {
             return true;
         }
         else {
@@ -693,7 +699,7 @@ class EndsQuery implements Query {
         this.field = field;
     }
     public boolean matches(String s) { 
-        if(s.contains(this.field)) {
+        if(s.endsWith(this.field)) {
             return true;
         }
         else {
@@ -708,7 +714,17 @@ class NotQuery implements Query {
         this.field = field;
     }
     public boolean matches(String s) {
-        if (field.matches(s) == true) {
+        if (this.field.toString().contains("Length") ||
+            this.field.toString().contains("Less") ||
+            this.field.toString().contains("Greater")){
+            if (this.field.matches(Integer.toString(s.length())) == true){
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else if (this.field.matches(s) == true) {
             return false;
         } 
         else {

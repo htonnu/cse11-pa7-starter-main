@@ -479,7 +479,7 @@ class EndsQuery implements Query {
         this.field = field;
     }
     public boolean matches(String s) { 
-        if(s.contains(this.field)) {
+        if(s.endsWith(this.field)) {
             return true;
         }
         else {
